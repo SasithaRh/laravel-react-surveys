@@ -4,7 +4,7 @@ import Dashboard from "./views/Dashboard.jsx";
 import Login from "./views/Login.jsx";
 import Surveys from "./views/Surveys.jsx";
 import GuestLayout from "./components/GuestLayout.jsx";
-import Register from "./views/Register.jsx";
+import Signup from "./views/Signup.jsx";
 import SurveyView  from "./views/SurveyView.jsx";
 
 const router = createBrowserRouter([
@@ -39,8 +39,8 @@ const router = createBrowserRouter([
         element: <Login />
       },
       {
-        path: 'register',
-        element: <Register />
+        path: 'signup',
+        element: <Signup />
       }
     ]
   }
