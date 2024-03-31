@@ -2,10 +2,13 @@ import {Fragment} from 'react'
 import {Disclosure, Menu, Transition} from '@headlessui/react'
 import {Bars3Icon, BellIcon, XMarkIcon} from '@heroicons/react/24/outline'
 import {Navigate, Outlet} from "react-router-dom";
-// import {useStateContext} from "../contexts/ContextProvider.jsx";
+import {useStateContext} from "../contexts/ContextProvider.jsx";
 
 export default function GuestLayout() {
-
+    const { userToken } = useStateContext();
+    if (userToken) {
+        return <Navigate to="/" />
+      }
 
   return (
     <>

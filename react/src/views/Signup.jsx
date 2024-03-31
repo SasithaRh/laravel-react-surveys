@@ -27,6 +27,11 @@ export default function Signup() {
       .then(({ data }) => {
         setCurrentUser(data.user)
         setUserToken(data.token)
+        setEmail("")
+        setFullName("")
+        setPassword("")
+        setPasswordConfirmation("")
+
       })
       .catch((error) => {
         if (error.response) {
@@ -49,7 +54,7 @@ export default function Signup() {
           to="/login"
           className="font-medium text-indigo-600 hover:text-indigo-500"
         >
-          Login with your account{fullName}{email}{password}{passwordConfirmation}
+          Login with your account
         </Link>
       </p>
 
