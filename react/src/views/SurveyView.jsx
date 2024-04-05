@@ -46,34 +46,46 @@ export default function SurveyView() {
   const onSubmit = (ev) => {
     ev.preventDefault();
 
-    const payload = { ...survey };
+   const payload = { ...survey };
     if (payload.image) {
       payload.image = payload.image_url;
     }
     delete payload.image_url;
-    let res = null;
-    if (id) {
-      res = axiosClient.put(`/survey/${id}`, payload);
-    } else {
-      res = axiosClient.post("/survey", payload);
-    }
 
-    res
-      .then((res) => {
-        console.log(res);
-        navigate("/surveys");
-        if (id) {
-          showToast("The survey was updated");
-        } else {
-          showToast("The survey was created");
-        }
-      })
-      .catch((err) => {
-        if (err && err.response) {
-          setError(err.response.data.message);
-        }
-        console.log(err, err.response);
-      });
+       axiosClient.post("/survey", payload) .then((res) => {
+            console.log(res);
+            navigate("/surveys");
+  })
+
+
+    // const payload = { ...survey };
+    // if (payload.image) {
+    //   payload.image = payload.image_url;
+    // }
+    // delete payload.image_url;
+    // let res = null;
+    // if (id) {
+    //   res = axiosClient.put(`/survey/${id}`, payload);
+    // } else {
+    //   res = axiosClient.post("/survey", payload);
+    // }
+
+    // res
+    //   .then((res) => {
+    //     console.log(res);
+    //     navigate("/surveys");
+    //     if (id) {
+    //       showToast("The survey was updated");
+    //     } else {
+    //       showToast("The survey was created");
+    //     }
+    //   })
+    //   .catch((err) => {
+    //     if (err && err.response) {
+    //       setError(err.response.data.message);
+    //     }
+    //     console.log(err, err.response);
+    //   });
   };
 
   function onQuestionsUpdate(questions) {
@@ -260,10 +272,10 @@ export default function SurveyView() {
               </div>
               {/*Active*/}
 
-              <button type="button" onClick={addQuestion}>
+              {/*<button type="button" onClick={addQuestion}>
                 Add question
-              </button>
-              {/* <SurveyQuestions
+              </button>*/}
+               {/* <SurveyQuestions
                 questions={survey.questions}
                 onQuestionsUpdate={onQuestionsUpdate}
               /> */}
