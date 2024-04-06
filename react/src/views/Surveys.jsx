@@ -4,9 +4,11 @@ import { useStateContext } from "../contexts/ContextProvider";
 import SurveyListItem from "../components/SurveyListItem";
 import TButton from "../components/core/TButton";
 import { PlusCircleIcon } from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
+import axiosClient from "../axios";
 const Dashboard = () => {
 
-    const {surveys} = useStateContext();
+    const [surveys, setSurveys] = useState([]);
     console.log(surveys)
     const onDeleteClick = (id) => {
         if (window.confirm("Are you sure you want to delete this survey?")) {
@@ -16,6 +18,18 @@ const Dashboard = () => {
           });
         }
       };
+      const getSurveys = () => {
+
+        axiosClient.get('/survey').then(({data})=>{
+            setSurveys(data.data)
+        })
+
+      };
+
+      useEffect(() => {
+        getSurveys();
+      }, []);
+
   return (
 
 
@@ -28,7 +42,7 @@ const Dashboard = () => {
             </TButton>
           }
         >
-
+        <p>{surveys.length}</p>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 md:grid-cols-3">
             {surveys.map((survey) => (

@@ -1,8 +1,10 @@
-import { Fragment } from 'react'
+import { Fragment, useEffect } from 'react'
 import { Disclosure, Menu, Transition } from '@headlessui/react'
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import {Link, Navigate, NavLink, Outlet} from "react-router-dom";
 import {useStateContext} from "../contexts/ContextProvider.jsx";
+import axiosClient from "../axios";
+
 
 const navigation = [
   { name: 'Dashboard', to: '/', current: true },
@@ -16,7 +18,7 @@ function classNames(...classes) {
 export default function DefaultLayout() {
   const {currentUser, userToken, setCurrentUser, setUserToken} = useStateContext();
   if (!userToken) {
-    return <Navigate to="/login" replace />;
+    return <Navigate to="/login"  />;
   }
 
   const logout = (ev) => {
@@ -24,7 +26,12 @@ export default function DefaultLayout() {
     setCurrentUser({})
     setUserToken(null)
   }
-
+  useEffect(() => {
+    axiosClient.get('/me')
+      .then(({ data }) => {
+        setCurrentUser(data)
+      })
+  }, [])
   return (
     <>
       <div className="min-h-full">
