@@ -197,7 +197,7 @@ export default function SurveyView() {
                 >
                   Description
                 </label>
-                <pre>{ JSON.stringify(survey, undefined, 2) }</pre>
+                {/* <pre>{ JSON.stringify(survey, undefined, 2) }</pre> */}
                 <textarea
                   name="description"
                   id="description"
